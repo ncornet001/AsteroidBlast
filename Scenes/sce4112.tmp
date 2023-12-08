@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://cteenu8e10frl"]
+[gd_scene load_steps=8 format=3 uid="uid://cteenu8e10frl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_05n54"]
-[ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_hvc6u"]
 [ext_resource type="PackedScene" uid="uid://bhk45m05hppk1" path="res://Scenes/asteroid.tscn" id="2_5y5sk"]
 [ext_resource type="PackedScene" uid="uid://crxnaowtrwhcb" path="res://Scenes/bullet.tscn" id="3_vxk3q"]
 
@@ -18,10 +17,6 @@ sky = SubResource("Sky_etmws")
 size = Vector3(1196.06, 68.9821, 1)
 
 [node name="Scene" type="Node3D"]
-
-[node name="Spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150)
-script = ExtResource("1_hvc6u")
 
 [node name="Player" type="Node3D" parent="."]
 script = ExtResource("1_05n54")
@@ -43,13 +38,11 @@ transform = Transform3D(1, 0, 0, 0, 0.00965147, 0.999953, 0, -0.999953, 0.009651
 radius = 0.235524
 
 [node name="GunBarrel" type="Node3D" parent="Player/Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13106, -2.94774)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13106, -0.621886)
 
-[node name="InvisibleBorder" type="StaticBody3D" parent="."]
-collision_layer = 2
-collision_mask = 2
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InvisibleBorder"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40.6869)
 shape = SubResource("BoxShape3D_j1l0f")
 

@@ -3,6 +3,12 @@ extends Node3D
 @onready var cam = $Camera
 @onready var reticule = $Reticule
 @onready var gun = $Gun
+@onready var gunBarrel = $Gun/GunBarrel
+
+@export var fireDelay = 0.3
+var cooldown = 0
+
+var bulletPrefab = preload("res://Scenes/bullet.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -10,6 +16,22 @@ func _physics_process(delta):
 	if(not res.is_empty()):
 		reticule.transform.origin = reticule.transform.origin.lerp(res.position,0.1)
 		gun.look_at(reticule.transform.origin)
+
+func _process(delta):
+	cooldown -= delta
+	
+func _input(event):
+	if (event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT):
+		if(cooldown < 0):
+			fire()
+		
+
+func fire():
+	var b = bulletPrefab.instantiate()
+	add_child(b)
+	b.transform = gunBarrel.global_transform
+	cooldown = fireDelay
+	
 
 func raycast_from_mouse():
 	var m_pos = get_viewport().get_mouse_position()

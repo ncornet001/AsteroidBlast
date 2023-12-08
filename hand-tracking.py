@@ -15,7 +15,7 @@ with mp_hands.Hands(
   min_detection_confidence=0.5,
   min_tracking_confidence=0.5) as hands:
   i = 0
-  while (cap.isOpened() and i < 250):
+  while (cap.isOpened()):
     success, image = cap.read()
     if not success:
       print("Impossible de lire la vidéo")
