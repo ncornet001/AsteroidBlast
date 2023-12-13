@@ -1,11 +1,11 @@
 extends Node3D
 
-@export var damage = 120
+@export var damage = 10
 @export var speed = 100
-@export var lifetime = 2
+@export var lifetime = 1
 @export var showtime = 0.03
 @export var force = 300
-#@export var explosion_prefab = preload("res://Prefabs/leaf_splash.tscn")
+@export var explosion_prefab = preload("res://Scenes/bullet_impact.tscn")
 #@export var blood_prefab = preload("res://Prefabs/blood_splat.tscn")
 
 #@onready var mesh = $Mesh
@@ -26,9 +26,9 @@ func collision():
 			if(result.collider.has_method("bullet_hit")):
 				result.collider.call("bullet_hit",damage)
 				queue_free()
-#				var explosion = blood_prefab.instantiate()
-#				world.add_child(explosion)
-#				explosion.transform.origin = result.position
+				var explosion = explosion_prefab.instantiate()
+				world.add_child(explosion)
+				explosion.transform.origin = result.position
 #				get_tree().call_group("PhysObject","directional_explosion",force,2,result.position,-basis.z)
 			else:
 #				var explosion = explosion_prefab.instantiate()

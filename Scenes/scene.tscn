@@ -1,9 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://cteenu8e10frl"]
+[gd_scene load_steps=36 format=3 uid="uid://cteenu8e10frl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_05n54"]
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_hvc6u"]
-[ext_resource type="PackedScene" uid="uid://bhk45m05hppk1" path="res://Scenes/asteroid.tscn" id="2_5y5sk"]
-[ext_resource type="PackedScene" uid="uid://crxnaowtrwhcb" path="res://Scenes/bullet.tscn" id="3_vxk3q"]
+[ext_resource type="PackedScene" uid="uid://bhk45m05hppk1" path="res://Scenes/asteroid.tscn" id="2_7pv22"]
+[ext_resource type="AudioStream" uid="uid://d0cuqgkqp3qav" path="res://Fire.wav" id="3_as7pd"]
+[ext_resource type="ArrayMesh" uid="uid://bafd47qb36n20" path="res://Models/Canon2.obj" id="4_jj0bj"]
+[ext_resource type="AudioStream" uid="uid://h2l81pooybyp" path="res://DistExp_03.wav" id="4_w2qg7"]
+[ext_resource type="Material" uid="uid://cuik1oii80m1q" path="res://Textures/CanonPlastic.tres" id="5_nutot"]
+[ext_resource type="Material" uid="uid://c03uhtpanowim" path="res://Textures/CanonMetal.tres" id="5_rhy6q"]
+[ext_resource type="Shader" path="res://Bg.gdshader" id="7_635fo"]
+[ext_resource type="Texture2D" uid="uid://cq75j6q3ptgyh" path="res://Textures/Sky.png" id="7_auqaa"]
+[ext_resource type="Texture2D" uid="uid://du63o2dc0h4ue" path="res://Textures/Particle.png" id="8_cpm4a"]
+[ext_resource type="AudioStream" uid="uid://csk2evgtvfe2b" path="res://Rocket_Scan.wav" id="8_vtd23"]
+[ext_resource type="Texture2D" uid="uid://yoand12rnf3f" path="res://Textures/OldTvFx.png" id="9_i4gc7"]
+[ext_resource type="Texture2D" uid="uid://c3msblpny68vd" path="res://Textures/Reticule3.png" id="9_s8vkl"]
+[ext_resource type="AudioStream" uid="uid://cjw6yp3igytr5" path="res://player_respawn.wav" id="12_dyh1b"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_a1gcr"]
 
@@ -11,22 +22,105 @@
 sky_material = SubResource("PhysicalSkyMaterial_a1gcr")
 
 [sub_resource type="Environment" id="Environment_ae87j"]
-background_mode = 2
+background_mode = 1
+background_canvas_max_layer = -1
 sky = SubResource("Sky_etmws")
+ambient_light_source = 2
+fog_light_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f6ck5"]
+size = Vector3(22.669, 15.7467, 23.1883)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oic7x"]
+size = Vector3(55.5841, 39.1635, 18.2352)
+
+[sub_resource type="Curve" id="Curve_dwhuw"]
+_data = [Vector2(0, 0.389474), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u8tv5"]
+curve = SubResource("Curve_dwhuw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lira8"]
+emission_shape = 1
+emission_sphere_radius = 0.03
+direction = Vector3(0, 0, -1)
+spread = 90.0
+gravity = Vector3(0, 0, -20)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+scale_curve = SubResource("CurveTexture_u8tv5")
+color = Color(1, 0.560784, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii1cq"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("8_cpm4a")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_yylp3"]
+material = SubResource("StandardMaterial3D_ii1cq")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2m5sp"]
+streams_count = 1
+stream_0/stream = ExtResource("3_as7pd")
+stream_0/weight = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_31xmj"]
+radius = 3.0
+height = 400.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecfiw"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7to7j"]
+font_size = 67
+font_color = Color(0, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2ih3"]
+font_size = 32
+font_color = Color(0, 0.760784, 0.0196078, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g1gpa"]
+font_size = 67
+font_color = Color(1, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7um4x"]
+font_size = 109
+font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j1l0f"]
-size = Vector3(1196.06, 68.9821, 1)
+size = Vector3(1196.06, 500, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ui3mc"]
+render_priority = 0
+shader = ExtResource("7_635fo")
+shader_parameter/tex = ExtResource("7_auqaa")
+
+[sub_resource type="QuadMesh" id="QuadMesh_l35lb"]
+material = SubResource("ShaderMaterial_ui3mc")
+size = Vector2(995, 515)
 
 [node name="Scene" type="Node3D"]
 
-[node name="Spawner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150)
+[node name="Spawner" type="Node3D" parent="." groups=["gamemanagers"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -300)
 script = ExtResource("1_hvc6u")
 
-[node name="Player" type="Node3D" parent="."]
+[node name="Asteroid" parent="." instance=ExtResource("2_7pv22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.308, 0, -71.1958)
+speed = 0
+
+[node name="Player" type="Node3D" parent="." groups=["gamemanagers"]]
 script = ExtResource("1_05n54")
 
 [node name="Reticule" type="Node3D" parent="Player"]
+visible = false
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Player/Reticule"]
 size = Vector3(0.1, 0.1, 0.1)
@@ -34,18 +128,274 @@ size = Vector3(0.1, 0.1, 0.1)
 [node name="Camera" type="Camera3D" parent="Player"]
 environment = SubResource("Environment_ae87j")
 fov = 45.0
+far = 800.0
+
+[node name="DangerZone" type="Area3D" parent="Player"]
+collision_layer = 4
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/DangerZone"]
+stream = ExtResource("8_vtd23")
+autoplay = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/DangerZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.4556)
+shape = SubResource("BoxShape3D_f6ck5")
+
+[node name="DeadZone" type="Area3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.0205)
+collision_layer = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/DeadZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.60756)
+shape = SubResource("BoxShape3D_oic7x")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Player/DeadZone"]
+stream = ExtResource("4_w2qg7")
 
 [node name="Gun" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.04363, 0.157322)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.777236, 0.157322)
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Player/Gun"]
 transform = Transform3D(1, 0, 0, 0, 0.00965147, 0.999953, 0, -0.999953, 0.00965147, 0, 0.15177, -1.75151)
+visible = false
 radius = 0.235524
 
 [node name="GunBarrel" type="Node3D" parent="Player/Gun"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13106, -2.94774)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.948)
+
+[node name="Fire" type="GPUParticles3D" parent="Player/Gun/GunBarrel"]
+emitting = false
+amount = 16
+lifetime = 0.6
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.58
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lira8")
+draw_pass_1 = SubResource("QuadMesh_yylp3")
+
+[node name="GunBarrel2" type="Node3D" parent="Player/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -2.948)
+
+[node name="Fire" type="GPUParticles3D" parent="Player/Gun/GunBarrel2"]
+emitting = false
+amount = 16
+lifetime = 0.6
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.58
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lira8")
+draw_pass_1 = SubResource("QuadMesh_yylp3")
+
+[node name="FireSound" type="AudioStreamPlayer" parent="Player/Gun"]
+stream = SubResource("AudioStreamRandomizer_2m5sp")
+
+[node name="FreeFireZone" type="Area3D" parent="Player/Gun"]
+collision_layer = 4
+
+[node name="FireCylinder" type="CollisionShape3D" parent="Player/Gun/FreeFireZone"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.180659, -202.159)
+shape = SubResource("CapsuleShape3D_31xmj")
+
+[node name="Canon2" type="MeshInstance3D" parent="Player/Gun"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 0, -1.749)
+mesh = ExtResource("4_jj0bj")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_rhy6q")
+surface_material_override/1 = ExtResource("5_nutot")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Gun/Canon2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.958344, 0.235194, 1.49012e-07)
+size = Vector3(0.131934, 0.0310354, 0.0243133)
+material = SubResource("StandardMaterial3D_ecfiw")
+
+[node name="Canon3" type="MeshInstance3D" parent="Player/Gun"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.5, 0, -1.749)
+mesh = ExtResource("4_jj0bj")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("5_rhy6q")
+surface_material_override/1 = ExtResource("5_nutot")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Player/Gun/Canon3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.958, 0.235, 0)
+size = Vector3(0.131934, 0.0310354, 0.0243133)
+material = SubResource("StandardMaterial3D_ecfiw")
+
+[node name="Control" type="Control" parent="Player"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reticule" type="TextureRect" parent="Player/Control"]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+pivot_offset = Vector2(40, 40)
+texture = ExtResource("9_s8vkl")
+expand_mode = 1
+
+[node name="Reticule2" type="TextureRect" parent="Player/Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 60.0
+offset_bottom = 60.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("8_cpm4a")
+expand_mode = 1
+
+[node name="Score" type="Label" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -371.0
+offset_top = 17.0
+offset_right = 371.0
+offset_bottom = 112.0
+grow_horizontal = 2
+text = "AIM AT THE ASTEROIDS"
+label_settings = SubResource("LabelSettings_7to7j")
+horizontal_alignment = 1
+
+[node name="BestScore" type="Label" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 2.0
+offset_top = 84.0
+offset_right = 116.0
+offset_bottom = 179.0
+grow_horizontal = 2
+label_settings = SubResource("LabelSettings_g2ih3")
+horizontal_alignment = 1
+
+[node name="Intro" type="Control" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Multiple" type="Label" parent="Player/Control/Intro"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -522.0
+offset_top = 144.0
+offset_right = 522.0
+offset_bottom = 334.0
+grow_horizontal = 2
+text = "WARNING
+! MULTIPLE METEOR INCOMING !"
+label_settings = SubResource("LabelSettings_g1gpa")
+horizontal_alignment = 1
+
+[node name="Protect" type="Label" parent="Player/Control/Intro"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -395.0
+offset_top = -216.0
+offset_right = 399.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "PROTECT YOUR STATION"
+label_settings = SubResource("LabelSettings_7to7j")
+horizontal_alignment = 1
+
+[node name="Lost" type="Control" parent="Player/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="Player/Control/Lost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.580392)
+
+[node name="Multiple" type="Label" parent="Player/Control/Lost"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -522.0
+offset_top = 144.0
+offset_right = 522.0
+offset_bottom = 334.0
+grow_horizontal = 2
+text = "DANGER
+! HULL BREACH !"
+label_settings = SubResource("LabelSettings_g1gpa")
+horizontal_alignment = 1
+
+[node name="Multiple2" type="Label" parent="Player/Control/Lost"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -519.0
+offset_top = -329.0
+offset_right = 525.0
+offset_bottom = -139.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_7um4x")
+horizontal_alignment = 1
+
+[node name="WhiteSceen" type="ColorRect" parent="Player/Control/Lost"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="OldTVFx" type="TextureRect" parent="Player/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_i4gc7")
+expand_mode = 1
+
+[node name="RestartSound" type="AudioStreamPlayer" parent="Player"]
+stream = ExtResource("12_dyh1b")
 
 [node name="InvisibleBorder" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -366.067)
 collision_layer = 2
 collision_mask = 2
 
@@ -53,19 +403,10 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40.6869)
 shape = SubResource("BoxShape3D_j1l0f")
 
-[node name="Asteroid" parent="." instance=ExtResource("2_5y5sk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59034, -48.346)
-
-[node name="Asteroid2" parent="." instance=ExtResource("2_5y5sk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2526, -54.8694)
-
-[node name="Asteroid3" parent="." instance=ExtResource("2_5y5sk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.92875, -5.32782, -32.0997)
-
-[node name="Asteroid4" parent="." instance=ExtResource("2_5y5sk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3146, 0, -28.1832)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.914642, 0.404264, 0, -0.404264, 0.914642, 0, 0, 0)
+transform = Transform3D(0.573905, 0.331061, -0.749021, 0, 0.914642, 0.404264, 0.818922, -0.232009, 0.524918, 0, 0, 0)
+light_energy = 2.418
 
-[node name="Bullet" parent="." instance=ExtResource("3_vxk3q")]
+[node name="Background" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -627)
+mesh = SubResource("QuadMesh_l35lb")

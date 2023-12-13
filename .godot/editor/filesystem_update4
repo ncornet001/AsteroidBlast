@@ -1,0 +1,16 @@
+res://Scenes/scene.tscn
+res://Textures/CanonPlastic.tres
+res://Textures/CanonMetal.tres
+res://Bg.gdshader
+res://Scenes/asteroid.tscn
+res://Scenes/bullet_impact.tscn
+res://Scenes/bullet.tscn
+res://Textures/bullet.tscn
+res://Scenes/explosion.tscn
+res://Scenes/small_asteroid.tscn
+res://Scripts/Spawner.gd
+res://Scripts/Player.gd
+res://Scripts/Asteroid.gd
+res://Scripts/Bullet.gd
+res://Scripts/Explosion.gd
+res://Scripts/Spark.gd

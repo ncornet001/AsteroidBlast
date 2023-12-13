@@ -1,0 +1,10 @@
+res://Scenes/asteroid.tscn::5601b1f014910b5f952cee9e2a72deb0::1702425834::res://.godot/exported/133200997/export-cc8bb94e6afbb30fe28c9d0f0e2ec63b-asteroid.scn
+res://Scenes/bullet.tscn::325aa2cccfc509a20717d3ffaa928762::1702425834::res://.godot/exported/133200997/export-ebb3521b4f0ab2fc80eef1183e18e924-bullet.scn
+res://Scenes/bullet_impact.tscn::8e45fa7e42b7f51d30aaf38cb456d57a::1702425834::res://.godot/exported/133200997/export-c75c6035dc0f47a9345193f380a751e8-bullet_impact.scn
+res://Scenes/explosion.tscn::4f92cb85beb4f867b4a66a3c66dd7fd3::1702425834::res://.godot/exported/133200997/export-684afae0e3e464ad6cc7c587981433c3-explosion.scn
+res://Scenes/scene.tscn::acb07681360db64edf2ed2c1c03cca87::1702426011::res://.godot/exported/133200997/export-d3910c5c9e9c5314673dd53af44d685e-scene.scn
+res://Scenes/small_asteroid.tscn::639b8eadb686d59f3e0b3efd7581e13e::1702425834::res://.godot/exported/133200997/export-d9e2431fa9fe4684f6f7ec3a0c30da22-small_asteroid.scn
+res://Textures/bullet.tres::c2f923a173fbfa97cb11ec5453329959::1702405882::res://.godot/exported/133200997/export-3a1b9579ea60a2a8dc94f691ec1e126b-bullet.res
+res://Textures/bullet.tscn::12d0cd94d3c0f38d47012b939200bf9e::1702425834::res://.godot/exported/133200997/export-e2a86e5b6779b83dce06d38e3c88cc75-bullet.scn
+res://Textures/CanonMetal.tres::e61b7843b9c7a7e4a74db89ef99ee9b1::1702425592::res://.godot/exported/133200997/export-2896d8f03236972dd4eed245b0ac2203-CanonMetal.res
+res://Textures/CanonPlastic.tres::9fc38f5d235304e0131797c98b421f6a::1702425592::res://.godot/exported/133200997/export-0dc97689cd7041c0db7c495c48d44048-CanonPlastic.res

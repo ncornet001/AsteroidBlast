@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cuik1oii80m1q"]
+
+[ext_resource type="Texture2D" uid="uid://cnffurqyuss58" path="res://Textures/Canon.png" id="1_dysyc"]
+
+[resource]
+albedo_texture = ExtResource("1_dysyc")
+metallic_specular = 0.0
+uv1_scale = Vector3(2, 2, 2)

@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://csswsilyxuxs3"]
+
+[ext_resource type="ArrayMesh" uid="uid://5aw0bryyxsmj" path="res://Models/Asteroid.obj" id="1_k7d06"]
+[ext_resource type="Script" path="res://Scripts/SmallAsteroid.gd" id="1_mxyp3"]
+[ext_resource type="Texture2D" uid="uid://cik0nkufe6ja8" path="res://Textures/Asteroid.png" id="2_irw7w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5ebk0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kr6lc"]
+albedo_texture = ExtResource("2_irw7w")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+
+[node name="SmallAsteroid" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_mxyp3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5ebk0")
+
+[node name="Asteroid" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+mesh = ExtResource("1_k7d06")
+surface_material_override/0 = SubResource("StandardMaterial3D_kr6lc")

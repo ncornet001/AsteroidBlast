@@ -51,9 +51,9 @@ with mp_hands.Hands(
     if cv2.waitKey(5) & 0xFF == 27:
       break
 
-    if(hand_closed):
-      pyautogui.click()
-      print("Main fermée :", hand_closed)
+    #if(hand_closed):
+      #pyautogui.click()
+      #print("Main fermée :", hand_closed)
     i += 1
     print(i)
 

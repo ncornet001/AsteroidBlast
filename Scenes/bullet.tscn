@@ -1,10 +1,49 @@
-[gd_scene load_steps=2 format=3 uid="uid://crxnaowtrwhcb"]
+[gd_scene load_steps=8 format=3 uid="uid://crxnaowtrwhcb"]
 
 [ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_vmslm"]
+[ext_resource type="Texture2D" uid="uid://du63o2dc0h4ue" path="res://Textures/Particle.png" id="2_05a4q"]
+
+[sub_resource type="Curve" id="Curve_0cjov"]
+_data = [Vector2(0, 0.494737), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_blvea"]
+curve = SubResource("Curve_0cjov")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h72fn"]
+emission_shape = 1
+emission_sphere_radius = 0.03
+direction = Vector3(0, 0, 1)
+spread = 0.0
+gravity = Vector3(0, 0, 20)
+scale_curve = SubResource("CurveTexture_blvea")
+color = Color(1, 0.560784, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l3ln"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_05a4q")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_jhxa5"]
+material = SubResource("StandardMaterial3D_4l3ln")
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_vmslm")
 speed = 280
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+visible = false
 radius = 0.3
+
+[node name="Mesh" type="GPUParticles3D" parent="."]
+amount = 32
+lifetime = 0.6
+preprocess = 0.4
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_h72fn")
+draw_pass_1 = SubResource("QuadMesh_jhxa5")

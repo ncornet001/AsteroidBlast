@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bafd47qb36n20"
+path="res://.godot/imported/Canon2.obj-98991628e0376eba537c22887721d58d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Canon2.obj-98991628e0376eba537c22887721d58d.mesh"]
+
+source_file="res://Models/Canon2.obj"
+dest_files=["res://.godot/imported/Canon2.obj-98991628e0376eba537c22887721d58d.mesh", "res://.godot/imported/Canon2.obj-98991628e0376eba537c22887721d58d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(0.3, 0.3, 0.3)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

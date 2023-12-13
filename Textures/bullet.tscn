@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://1ul1i70ox62a"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_sjrj7"]
+[ext_resource type="Material" uid="uid://b4cmk0md8qyr2" path="res://Textures/bullet.tres" id="4_hputn"]
+[ext_resource type="Texture2D" uid="uid://du63o2dc0h4ue" path="res://Textures/Particle.png" id="5_llwov"]
+
+[sub_resource type="Curve" id="Curve_u5uek"]
+_data = [Vector2(0, 0.231579), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hsitx"]
+curve = SubResource("Curve_u5uek")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tp0fd"]
+emission_shape = 1
+emission_sphere_radius = 0.03
+direction = Vector3(0, 0, 1)
+spread = 0.0
+gravity = Vector3(0, 0, 20)
+scale_curve = SubResource("CurveTexture_hsitx")
+color = Color(1, 0.560784, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k45qr"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_llwov")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_gatum"]
+material = SubResource("StandardMaterial3D_k45qr")
+
+[node name="Bullet" type="Node3D"]
+script = ExtResource("1_sjrj7")
+speed = 70
+showtime = 0.02
+force = 150
+
+[node name="Mesh2" type="CSGMesh3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, -8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0)
+visible = false
+material = ExtResource("4_hputn")
+
+[node name="Mesh" type="GPUParticles3D" parent="."]
+amount = 32
+lifetime = 0.6
+preprocess = 0.4
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_tp0fd")
+draw_pass_1 = SubResource("QuadMesh_gatum")
